@@ -1,16 +1,21 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, numberAttribute } from '@angular/core';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  route = inject(ActivatedRoute);
+export class HomeComponent implements OnInit, OnChanges {
+  @Input({transform: numberAttribute}) id = 0;
 
-  id: string | null = '';
+  @Input() name = '';
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    console.log(typeof(this.id), this.id);
+    console.log(typeof(this.name), this.name);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(typeof(this.id), this.id);
+    console.log(typeof(this.name), this.name);
   }
 }
